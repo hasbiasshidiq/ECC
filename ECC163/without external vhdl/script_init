@@ -1,0 +1,36 @@
+	# This activates display of all executed commands
+	commands-disp
+	#netlist objective-simu
+	#netlist objective-synth
+
+	# enable computing of map delays (at bit level)
+	map postmap-timing true
+
+	echo ==========================================
+	echo Loading design...
+	load
+
+	# TEMPORARY. FIXME !
+	sched use-vexalloc-share
+
+	hier simp
+	core elabo-iter-max 0
+	core elaborate
+
+	echo ==========================================
+	echo Display some more details...
+#	hier disp-details
+	techno eval
+	hier time disp
+	hier disp-tree
+
+	postprocess
+	techno eval
+	hier time upd
+	hier time disp
+	netlist tb-gen -odir vhdl -cy 1000 -rawbin -the-in -f input_vectors.bin -the-out -f output_vectors.bin
+	vhdl
+	#techno cmd backend-vivado
+	#backend-gen-prj
+	
+  augh-resource

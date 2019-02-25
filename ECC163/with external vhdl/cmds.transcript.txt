@@ -1,0 +1,55 @@
+
+commands-disp
+
+op extern-comp -combi -shared -hwres lut6:14 -delay 30 -func multiplikasi -comp multiplikasi -out data_out 64 -in get_part 8 -in inA_0 32 -in inA_1 32 -in inA_2 32 -in inA_3 32 -in inA_4 32 -in inA_5 32 -in inB_0 32 -in inB_1 32 -in inB_2 32 -in inB_3 32 -in inB_4 32 -in inB_5 32
+
+#hier actsimp-verbose
+#netlist simp-verbose
+
+#build clkdiv 10
+
+load
+
+hier disp-tree -o hier-load.txt
+
+hier upd
+
+hier disp-tree -o hier-simp.txt
+
+#target-freq 300M
+#map fsmstates-dup +5
+map postmap-timing
+
+netlist comps-inline yes
+netlist tb-disp-cycles no
+#netlist objective-simu yes
+
+#techno cmd use-dsp no
+
+hier disp-details
+hier time disp
+hier clockcycles
+
+#map dump-states-en map-dump-states
+#map retiming-en
+
+hier time upd
+
+postprocess
+
+#netlist test-retiming
+
+hier time upd
+hier time disp
+#hier clockcycles
+
+#hier disp-tree
+
+techno eval
+
+vhdl
+
+#netlist tb-gen-simple -odir vhdl input_vectors.bin 4 output_vectors.bin 1 2000
+
+plugin cmd xilinx gen-xst-project
+

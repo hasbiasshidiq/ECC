@@ -1,0 +1,94 @@
+Searching for plugin lib name libxilinx.so ...
+Trying path /usr/lib/augh/plugins/libxilinx.so ...
+INFO : Added plugin 'xilinx' version '0.1'.
+WARNING : Applying a default chip usage ratio of 0.800000.
+This is augh 0.11.0
+High-level synthesis of C programs.
+Chosen technology : virtex-7
+Speed grade : 3
+Chosen chip : xc7v585t
+Package : ffg1157
+Resource limits : lutram:88806, bram36:636, dsp48e:1008, lut6:291360, dff:582720
+Optimization level: 0
+AUGH > op extern-comp -combi -shared -hwres lut6:14 -delay 30 -func multiplikasi -comp multiplikasi -out data_out 64 -in get_part 8 -in inA_0 32 -in inA_1 32 -in inA_2 32 -in inA_3 32 -in inA_4 32 -in inA_5 32 -in inB_0 32 -in inB_1 32 -in inB_2 32 -in inB_3 32 -in inB_4 32 -in inB_5 32
+AUGH > load
+Loading 'ECC163.c'
+INFO : Using the externally-preprocessed file as input: /tmp/augh_Si4gSH.
+Warning: At "ECC163.c":93, initialization of array 'G_x': there are 2 values out of the array boundary.
+Warning: At "ECC163.c":97, initialization of array 'G_y': there are 2 values out of the array boundary.
+Warning: At "ECC163.c":101, initialization of array 'f': there are 2 values out of the array boundary.
+Info: Setting top-level functions: augh_main (total: 1)
+Adding operators...  add(1)  sub(3)  divqr(1)  shl(1)  shr(1)  multiplikasi(1)
+AUGH > hier disp-tree -o hier-load.txt
+AUGH > hier upd
+INFO Simplifications done : DeadNodes=2 JumpDel=66 LabelDel=583 StateEmpty=305 BbEmpty=33 BbMerge=1029 LoopNoIter=6
+INFO Simplifications done : StateEmpty=8 BbEmpty=3 BbMerge=14
+AUGH > hier disp-tree -o hier-simp.txt
+AUGH > map postmap-timing
+AUGH > netlist comps-inline yes
+AUGH > netlist tb-disp-cycles no
+AUGH > hier disp-details
+Number of nodes: PROC:1 BB:668 STATE:1489 LOOP:257 SWITCH:79 CASE:158 (total 2652)
+AUGH > hier time disp
+  Target frequency/period is : 1e+08 MHz / 10 ns
+  Total execution time (estim)  : min 2593 / avg 292252 / max 336246 (clock cycles)
+  Total execution time (mapper) : min 0 / avg 0 / max 0 (clock cycles)
+  Maximum delay (estim)  : 9.392 ns / 106.474 MHz
+  Maximum delay (mapper) : 0 ns / 0 MHz
+  Maximum clock cycles per control step : estim 1, mapper 0
+First infinite loop, internal execution time : min 2591 / avg 292250 / max 336244 (clock cycles)
+AUGH > hier clockcycles
+States that take 1 clock cycles : 1489 (total 292251 clock cycles)
+AUGH > hier time upd
+AUGH > postprocess
+Extending components...
+Adding operators...
+Removing unused components...
+Removing components...
+Mapping...
+Connecting the system ports (clock, reset, start)...
+INFO: Post-mapping timing analysis: +3 +3 +3 +3 +3 +3 +3 +3 +3 +3 +3 +3 +3 +3 +3 +3 +3 +3 +3 +3 +3 +3 +3 +3 +3 +3 +3 +3 +3 +3 +3 +3 +3 +3 +3 +3 +3 +3 +3 +3 +3 +3 +3 +3 +3 +3 +3 +3 +3 +3 +3 +3 +3 +3 +3 +3 +3 +3 +3 +3 +3 +3 +3 +3 +3 +3 (states fixed: 66)
+Post-processing done in 0.0807343 seconds.
+AUGH > hier time upd
+AUGH > hier time disp
+  Target frequency/period is : 1e+08 MHz / 10 ns
+  Total execution time (estim)  : min 2593 / avg 292252 / max 336246 (clock cycles)
+  Total execution time (mapper) : min 2414 / avg 271611 / max 305837 (clock cycles)
+  Maximum delay (estim)  : 9.392 ns / 106.474 MHz
+  Maximum delay (mapper) : 31.54 ns / 31.7058 MHz
+  Maximum clock cycles per control step : estim 1, mapper 4
+First infinite loop, internal execution time : min 2591 / avg 292250 / max 336244 (clock cycles)
+AUGH > techno eval
++--------------+-------+----------------+----------------+----------------+----------------+
+|    Component |   #   |      dff       |     bram36     |     lutram     |      lut6      |
++--------------+-------+----------------+----------------+----------------+----------------+
+|          xor |    78 |      0   0.00% |      0   0.00% |      0   0.00% |   1789  20.28% |
+|          and |    14 |      0   0.00% |      0   0.00% |      0   0.00% |    138   1.56% |
+|          cmp |    23 |      0   0.00% |      0   0.00% |      0   0.00% |    112   1.27% |
+|          mux |    76 |      0   0.00% |      0   0.00% |      0   0.00% |   3154  35.76% |
+|          add |     1 |      0   0.00% |      0   0.00% |      0   0.00% |     32   0.36% |
+|          sub |     3 |      0   0.00% |      0   0.00% |      0   0.00% |    105   1.19% |
+|          shl |     1 |      0   0.00% |      0   0.00% |      0   0.00% |     96   1.09% |
+|        divqr |     1 |      0   0.00% |      0   0.00% |      0   0.00% |    120   1.36% |
+|          shr |     1 |      0   0.00% |      0   0.00% |      0   0.00% |     96   1.09% |
+| multiplikasi |     1 |      0   0.00% |      0   0.00% |      0   0.00% |     14   0.16% |
+|          mem |    37 |      0   0.00% |      1 100.00% |    804 100.00% |    804   9.12% |
+|          fsm |     1 |   1816  77.21% |      0   0.00% |      0   0.00% |   2360  26.76% |
+|          reg |    30 |    536  22.79% |      0   0.00% |      0   0.00% |      0   0.00% |
++--------------+-------+----------------+----------------+----------------+----------------+
+|        Total |       |   2352         |      1         |    804         |   8820         |
++--------------+-------+----------------+----------------+----------------+----------------+
+Estimation of the datapath worst combinatorial delay: 9.392 ns
+AUGH > vhdl
+AUGH > plugin cmd xilinx gen-xst-project
+Generating project files for Xilinx XST...
+WARNING: No pin attributes for port 'clock'. The UCF rules may be incomplete.
+WARNING: No pin attributes for port 'reset'. The UCF rules may be incomplete.
+WARNING: No pin attributes for port 'start'. The UCF rules may be incomplete.
+WARNING: No pin attributes for port 'stdout_data'. The UCF rules may be incomplete.
+WARNING: No pin attributes for port 'stdout_rdy'. The UCF rules may be incomplete.
+WARNING: No pin attributes for port 'stdout_ack'. The UCF rules may be incomplete.
+WARNING: No pin attributes for port 'stdin_rdy'. The UCF rules may be incomplete.
+WARNING: No pin attributes for port 'stdin_ack'. The UCF rules may be incomplete.
+WARNING: No pin attributes for port 'finish'. The UCF rules may be incomplete.
+WARNING: No pin attributes for port 'stdin_data'. The UCF rules may be incomplete.
